@@ -7,8 +7,8 @@ export const Route = createFileRoute("/about")({
 
 function About() {
   return (
-    <div className="bg-background py-16">
-      <div className="container-page space-y-16">
+    <div className="bg-background py-8 md:py-12">
+      <div className="container-page space-y-8 md:space-y-10">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-xs text-muted-foreground uppercase tracking-widest">
           <Link to="/" className="hover:text-foreground">Home</Link>

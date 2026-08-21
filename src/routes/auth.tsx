@@ -27,8 +27,8 @@ function Auth() {
   };
 
   return (
-    <div className="bg-background py-16">
-      <div className="container-page max-w-md space-y-8">
+    <div className="bg-background py-8 md:py-12">
+      <div className="container-page max-w-md space-y-6">
         {/* Breadcrumb */}
         <nav className="flex items-center justify-center gap-2 text-xs text-muted-foreground uppercase tracking-widest">
           <a href="/" className="hover:text-foreground">Home</a>

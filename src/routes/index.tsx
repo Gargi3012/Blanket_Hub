@@ -62,6 +62,7 @@ function Index() {
   const [customPattern, setCustomPattern] = useState("Classic Herringbone");
   const [customMaterial, setCustomMaterial] = useState("Dense Cloud Flannel");
   const [customQuantity, setCustomQuantity] = useState(10);
+  const [isSpotlightHovered, setIsSpotlightHovered] = useState(false);
 
   const sizePrices: Record<string, number> = {
     "Single (150x220 cm)": 1500,
@@ -190,17 +191,34 @@ function Index() {
             transform: `translate3d(${heroTilt.x * 0.8}px, ${heroTilt.y * 0.8}px, 0) scale(1.04)`,
           }}
         >
-          {heroBgs.map((img, index) => (
-            <img
-              key={img}
-              src={img}
-              alt=""
-              className={cn(
-                "absolute inset-0 h-full w-full object-cover transition-opacity duration-1500 ease-in-out",
-                bgIdx === index ? "opacity-100 animate-ken-burns" : "opacity-0"
-              )}
-            />
-          ))}
+          {heroBgs.map((img, index) => {
+            const isVideo = img === "/images/hero-blanket.jpg";
+            return isVideo ? (
+              <video
+                key={img}
+                src="/images/hero-video.mp4"
+                poster="/images/hero-blanket.jpg"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className={cn(
+                  "absolute inset-0 h-full w-full object-cover transition-opacity duration-1500 ease-in-out",
+                  bgIdx === index ? "opacity-100" : "opacity-0"
+                )}
+              />
+            ) : (
+              <img
+                key={img}
+                src={img}
+                alt=""
+                className={cn(
+                  "absolute inset-0 h-full w-full object-cover transition-opacity duration-1500 ease-in-out",
+                  bgIdx === index ? "opacity-100 animate-ken-burns" : "opacity-0"
+                )}
+              />
+            );
+          })}
           {/* Subtle Dark/Cream Luxury Vignette Gradient Overlays */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/25 z-10" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/35 z-10" />
@@ -208,13 +226,13 @@ function Index() {
 
         {/* Floating Glassmorphic Product Information Cards */}
         <div className="absolute top-[26%] right-[10%] hidden lg:flex flex-col gap-1.5 p-5 rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md text-white shadow-lift animate-float-slow z-20 max-w-[210px] pointer-events-none select-none">
-          <p className="text-[9px] uppercase tracking-widest text-gold font-bold">Standard Sizing</p>
+          <p className="text-[11px] uppercase tracking-widest text-gold font-bold">Standard Sizing</p>
           <h4 className="font-display text-sm font-semibold">AVAILABLE SIZES</h4>
           <p className="text-[10px] text-white/80 mt-0.5">Single • Queen • King</p>
         </div>
 
         <div className="absolute bottom-[28%] right-[14%] hidden lg:flex flex-col gap-1.5 p-5 rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md text-white shadow-lift animate-float-slow [animation-delay:2.5s] z-20 max-w-[190px] pointer-events-none select-none">
-          <p className="text-[9px] uppercase tracking-widest text-gold font-bold">Touch</p>
+          <p className="text-[11px] uppercase tracking-widest text-gold font-bold">Touch</p>
           <h4 className="font-display text-sm font-semibold">ULTRA SOFT</h4>
           <p className="text-[10px] text-white/80 mt-0.5">Heavyweight Mink Velvet</p>
         </div>
@@ -262,7 +280,7 @@ function Index() {
 
         {/* Minimal Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 z-20 text-center animate-pulse-slow pointer-events-none select-none">
-          <p className="text-[9px] uppercase tracking-[0.3em] text-white/70">Scroll to Explore</p>
+          <p className="text-[11px] uppercase tracking-[0.3em] text-white/70">Scroll to Explore</p>
           <span className="text-white/85 text-xs block mt-1">↓</span>
         </div>
       </section>
@@ -290,7 +308,7 @@ function Index() {
       </section>
 
       {/* 3. SHOP BY CATEGORY */}
-      <section id="categories" className="py-20 md:py-28 bg-[#FAF9F6]">
+      <section id="categories" className="py-10 md:py-16 bg-[#FAF9F6]">
         <div className="container-page space-y-12">
           <div className="text-center space-y-3">
             <p className="eyebrow">Luxury Sizing & Style</p>
@@ -320,7 +338,7 @@ function Index() {
                     <h3 className="font-display text-base text-foreground font-medium group-hover:text-gold transition-colors">
                       {cat.name}
                     </h3>
-                    <span className="inline-flex items-center justify-center gap-1 text-[9px] font-semibold text-foreground uppercase tracking-widest pt-2 group-hover:gap-1.5 transition-all">
+                    <span className="inline-flex items-center justify-center gap-1 text-xs font-semibold text-foreground uppercase tracking-widest pt-2 group-hover:gap-1.5 transition-all">
                       Explore <ArrowRight className="h-2.5 w-2.5 text-gold" />
                     </span>
                   </div>
@@ -331,7 +349,7 @@ function Index() {
       </section>
 
       {/* 4. BESTSELLERS SECTION */}
-      <section id="bestsellers" className="py-20 md:py-28 border-t border-border bg-card">
+      <section id="bestsellers" className="py-10 md:py-16 border-t border-border bg-card">
         <div className="container-page space-y-12">
           <div className="text-center space-y-3">
             <p className="eyebrow">High Demand Designs</p>
@@ -369,7 +387,7 @@ function Index() {
 
       {/* 5. FEATURED EDITORIAL SECTION */}
       {featuredProduct && (
-        <section className="py-20 md:py-28 bg-[#FAF9F6] border-t border-border">
+        <section className="py-10 md:py-16 bg-[#FAF9F6] border-t border-border">
           <div className="container-page space-y-12">
             <div className="text-center space-y-3">
               <p className="eyebrow">Luxury Spotlight</p>
@@ -378,14 +396,40 @@ function Index() {
             </div>
 
             <div className="grid items-center gap-12 lg:grid-cols-12 bg-card rounded-3xl border border-border shadow-lift overflow-hidden">
-              {/* Product Image Panel */}
-              <div className="lg:col-span-6 relative aspect-4/3 lg:aspect-square h-full">
+              {/* Product Image Panel with Hover Fabric Video */}
+              <div 
+                className="lg:col-span-6 relative aspect-4/3 lg:aspect-square h-full overflow-hidden cursor-pointer group"
+                onMouseEnter={() => setIsSpotlightHovered(true)}
+                onMouseLeave={() => setIsSpotlightHovered(false)}
+                onTouchStart={() => setIsSpotlightHovered(true)}
+                onTouchEnd={() => setIsSpotlightHovered(false)}
+              >
+                <video
+                  src="/images/collection-video.mp4"
+                  poster={featuredProduct.images[0]}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className={cn(
+                    "absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out z-10",
+                    isSpotlightHovered ? "opacity-100" : "opacity-0 pointer-events-none"
+                  )}
+                />
                 <img
                   src={featuredProduct.images[0]}
                   alt={featuredProduct.name}
-                  className="h-full w-full object-cover"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-103 z-0"
                 />
-                <div className="absolute inset-0 bg-[#35251a]/10 pointer-events-none" />
+                  <span className="absolute inset-0 bg-[#35251a]/10 pointer-events-none z-20" />
+                  <div className={cn(
+                    "absolute inset-0 bg-black/25 backdrop-blur-[1px] transition-opacity duration-500 flex items-center justify-center pointer-events-none z-25",
+                    isSpotlightHovered ? "opacity-0" : "opacity-100"
+                  )}>
+                    <span className="rounded-full bg-white/20 border border-white/30 backdrop-blur-md px-5 py-2.5 text-xs font-semibold uppercase tracking-widest text-white shadow-soft transition-transform duration-300 group-hover:scale-105">
+                      Touch to Feel Fabric
+                    </span>
+                  </div>
               </div>
 
               {/* Product Info Panel */}
@@ -543,7 +587,7 @@ function Index() {
       )}
 
       {/* 6. INTERACTIVE PRODUCT CUSTOMIZATION */}
-      <section className="py-20 md:py-28 bg-[#FAF9F6] border-t border-border">
+      <section className="py-10 md:py-16 bg-[#FAF9F6] border-t border-border">
         <div className="container-page space-y-12">
           <div className="text-center space-y-3">
             <p className="eyebrow">Visual Studio</p>
@@ -824,7 +868,7 @@ function Index() {
       </section>
 
       {/* 7. WHY CHOOSE US */}
-      <section className="py-20 md:py-28 bg-[#FAF9F6] border-t border-border">
+      <section className="py-10 md:py-16 bg-[#FAF9F6] border-t border-border">
         <div className="container-page space-y-16">
           <div className="text-center space-y-3">
             <p className="eyebrow">Luxury Manufacturing</p>
@@ -877,7 +921,7 @@ function Index() {
       </section>
 
       {/* 8. CLIENT REVIEWS CAROUSEL */}
-      <section className="py-20 md:py-28 bg-card border-t border-border">
+      <section className="py-10 md:py-16 bg-card border-t border-border">
         <div className="container-page space-y-12">
           <div className="text-center space-y-3">
             <p className="eyebrow">Client Feedback</p>
@@ -961,7 +1005,7 @@ function Index() {
       </section>
 
       {/* 9. INSTAGRAM / LOOKBOOK SECTION */}
-      <section className="py-20 md:py-28 bg-[#FAF9F6] border-t border-border">
+      <section className="py-10 md:py-16 bg-[#FAF9F6] border-t border-border">
         <div className="container-page space-y-12">
           <div className="text-center space-y-3">
             <p className="eyebrow">Styled Spaces</p>
@@ -1011,7 +1055,7 @@ function Index() {
       </section>
 
       {/* 10. NEWSLETTER */}
-      <section className="py-20 md:py-24 bg-cream border-t border-border">
+      <section className="py-10 md:py-16 bg-cream border-t border-border">
         <div className="container-page max-w-3xl text-center space-y-8">
           <div className="space-y-4">
             <div className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-gold-soft/40 text-gold">
@@ -1049,7 +1093,7 @@ function Index() {
       </section>
 
       {/* 11. FINAL WHOLESALE CTA */}
-      <section className="py-20 bg-[#eae3da]/40 border-t border-border">
+      <section className="py-10 bg-[#eae3da]/40 border-t border-border">
         <div className="container-page max-w-4xl text-center space-y-8">
           <div className="space-y-4">
             <p className="eyebrow">Direct Manufacturing</p>

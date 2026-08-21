@@ -140,7 +140,7 @@ export function Header() {
               placeholder="Search blankets, sizes, colours…"
               aria-label="Search products"
               className={cn(
-                "h-10 w-full rounded-full border text-sm outline-none transition-colors",
+                "h-10 w-full rounded-full border pl-9 pr-4 text-sm outline-none transition-colors",
                 isHomepage && !isScrolled
                   ? "border-white/20 bg-white/10 text-white placeholder:text-white/65 focus:border-white/50"
                   : "border-input bg-card text-foreground placeholder:text-muted-foreground focus:border-gold"

@@ -20,8 +20,8 @@ function Contact() {
   };
 
   return (
-    <div className="bg-background py-16">
-      <div className="container-page space-y-16">
+    <div className="bg-background py-8 md:py-12">
+      <div className="container-page space-y-8 md:space-y-10">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-xs text-muted-foreground uppercase tracking-widest">
           <Link to="/" className="hover:text-foreground">Home</Link>
@@ -100,17 +100,17 @@ function Contact() {
                 <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lift animate-bounce">
                   <MapPin className="h-5 w-5" />
                 </div>
-                <div>
-                  <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">{site.name} Mill Outlet</h4>
-                  <p className="text-[10px] text-muted-foreground mt-0.5">Panipat, Haryana, India</p>
+                <div className="space-y-1">
+                  <h4 className="text-sm md:text-base font-semibold uppercase tracking-wider text-foreground">{site.name} Mill Outlet</h4>
+                  <p className="text-xs md:text-sm text-muted-foreground">Panipat, Haryana, India</p>
                 </div>
                 <a
                   href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.mapQuery)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-full bg-foreground px-4 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-background shadow-soft hover:bg-foreground/90 transition-colors"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-foreground px-6 py-2.5 text-xs font-semibold uppercase tracking-widest text-background shadow-soft hover:bg-foreground/90 transition-colors"
                 >
-                  Get Directions <ArrowRight className="h-3 w-3" />
+                  Get Directions <ArrowRight className="h-3.5 w-3.5" />
                 </a>
               </div>
             </div>

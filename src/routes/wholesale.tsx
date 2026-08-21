@@ -47,8 +47,8 @@ function Wholesale() {
   };
 
   return (
-    <div className="bg-background py-16">
-      <div className="container-page space-y-12">
+    <div className="bg-background py-8 md:py-12">
+      <div className="container-page space-y-8 md:space-y-10">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-xs text-muted-foreground uppercase tracking-widest">
           <a href="/" className="hover:text-foreground">Home</a>

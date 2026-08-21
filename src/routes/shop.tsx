@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useSearch } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { SlidersHorizontal, ChevronRight, X } from "lucide-react";
 import { productsQuery } from "@/lib/products";
 import { ProductCard } from "@/components/ProductCard";
@@ -30,6 +30,11 @@ function Shop() {
   const [selectedCat, setSelectedCat] = useState<string | null>(category || null);
   const [maxPrice, setMaxPrice] = useState<number>(6000);
   const [sortBy, setSortBy] = useState<string>("featured");
+
+  // Sync url param changes to filter state
+  useEffect(() => {
+    setSelectedCat(category || null);
+  }, [category]);
 
   // Get distinct categories
   const categoriesList = useMemo(() => {
