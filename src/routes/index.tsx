@@ -969,18 +969,30 @@ function Index() {
               { img: "/images/cat-mink.jpg", label: "Master Bedroom Cozy" },
               { img: "/images/cat-fleece.jpg", label: "Living Room Throw Layer" },
               { img: "/images/cat-winter.jpg", label: "Double Quilt Warmth" },
-              { img: "/images/collection.jpg", label: "Textured Blanket Fold Stack" },
+              { img: "/images/collection.jpg", video: "/images/collection-video.mp4", label: "Textured Blanket Fold Stack" },
             ].map((item, i) => (
               <div
                 key={i}
                 className="group relative aspect-square rounded-2xl border border-border/40 overflow-hidden shadow-soft"
               >
-                <img
-                  src={item.img}
-                  alt={item.label}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-108"
-                />
+                {item.video ? (
+                  <video
+                    src={item.video}
+                    poster={item.img}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-108"
+                  />
+                ) : (
+                  <img
+                    src={item.img}
+                    alt={item.label}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-108"
+                  />
+                )}
                 <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                   <p className="text-xs text-white font-medium uppercase tracking-wider">{item.label}</p>
                 </div>
