@@ -27,7 +27,7 @@ function About() {
               <span className="italic text-foreground/80">Warmth and Comfort</span>
             </h1>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Based in the historic city of Panipat, India—known globally as the <em>City of Weavers</em>—Loom & Luxe has grown from a humble family-run weaving mill into a premier supplier of high-end mink, fleece, and quilted winter blankets.
+              Based in the historic city of Panipat, India—known globally as the <em>City of Weavers</em>—CozyNest has grown from a premier home textile workshop into a premier developer of high-end mink, fleece, and quilted winter blankets.
             </p>
             <p className="text-sm text-muted-foreground leading-relaxed">
               We stand at the unique crossroads of artisanal pride and state-of-the-art synthetic fiber spinning. By managing the supply chain end-to-end, we ensure that every box delivered to our B2B partners matches the exact touch, density, and color profile we designed at our loom.
@@ -48,7 +48,7 @@ function About() {
         <div className="space-y-10 border-t border-border pt-16">
           <div className="text-center space-y-2">
             <h2 className="font-display text-3xl text-foreground">Our Sourcing Pillars</h2>
-            <p className="text-xs text-muted-foreground uppercase tracking-widest">Principles Behind Loom & Luxe</p>
+            <p className="text-xs text-muted-foreground uppercase tracking-widest">Principles Behind CozyNest</p>
           </div>
 
           <div className="grid gap-8 sm:grid-cols-3">
@@ -92,7 +92,7 @@ function About() {
           <span className="eyebrow">Our Vision</span>
           <h2 className="font-display text-3xl sm:text-4xl text-foreground">Bringing Warmth to Every Space</h2>
           <p className="text-sm text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-            “Loom & Luxe was born out of a desire to make premium comfort accessible. We strive to be the most trusted supply partner for hotels, retail chains, and distributors by upholding rigorous Indian textile craftsmanship.”
+            “CozyNest was born out of a desire to make premium comfort accessible. We strive to be the most trusted supply partner for hotels, retail chains, and distributors by upholding rigorous Indian textile craftsmanship.”
           </p>
           <div className="pt-2">
             <Link

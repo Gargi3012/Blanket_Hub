@@ -9,17 +9,18 @@ import { useAuth } from "@/hooks/useAuth";
 import { cn } from "@/lib/utils";
 
 const nav = [
-  { label: "Home", to: "/" },
-  { label: "Collections", to: "/shop" },
-  { label: "Wholesale", to: "/wholesale" },
-  { label: "About Us", to: "/about" },
-  { label: "Contact", to: "/contact" },
+  { label: "Home", to: "/" as const },
+  { label: "Shop", to: "/shop" as const },
+  { label: "Collections", to: "/shop" as const, search: { category: "Premium Collection" } },
+  { label: "About Us", to: "/about" as const },
+  { label: "Contact", to: "/contact" as const },
 ];
 
 export function Header() {
   const [open, setOpen] = useState(false);
   const [term, setTerm] = useState("");
   const [focused, setFocused] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const { count } = useCart();
   const { user, isAdmin } = useAuth();
@@ -28,6 +29,14 @@ export function Header() {
   const boxRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => setOpen(false), [pathname]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const suggestions = useMemo<Product[]>(() => {
     const q = term.trim().toLowerCase();
@@ -49,14 +58,14 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/70 bg-background/85 backdrop-blur-md">
+    <header className={cn("sticky top-0 z-40 border-b transition-all duration-300", isScrolled ? "border-border bg-background/95 shadow-soft" : "border-border/70 bg-background/85 backdrop-blur-md")}>
       <div className="bg-primary text-primary-foreground">
-        <div className="container-page flex items-center justify-center gap-3 py-2 text-center text-[11px] tracking-[0.18em] uppercase">
-          Bulk Orders&nbsp;|&nbsp;Wholesale Pricing&nbsp;|&nbsp;Reliable Supply
+        <div className="container-page flex items-center justify-center gap-3 py-2 text-center text-[11px] tracking-[0.15em] uppercase font-semibold">
+          FREE SHIPPING ON ORDERS ABOVE ₹999 • EASY RETURNS • PREMIUM QUALITY
         </div>
       </div>
 
-      <div className="container-page flex items-center gap-4 py-4">
+      <div className={cn("container-page flex items-center gap-4 transition-all duration-300", isScrolled ? "py-2.5" : "py-4.5")}>
         <button
           className="lg:hidden"
           aria-label="Open menu"
@@ -66,7 +75,7 @@ export function Header() {
         </button>
 
         <Link to="/" className="mr-2 shrink-0">
-          <span className="font-display text-2xl leading-none tracking-tight md:text-[1.7rem]">
+          <span className={cn("font-display leading-none tracking-tight transition-all duration-300", isScrolled ? "text-xl md:text-2xl" : "text-2xl md:text-[1.7rem]")}>
             {site.name}
           </span>
           <span className="hidden text-[10px] uppercase tracking-[0.28em] text-muted-foreground sm:block">
@@ -77,10 +86,11 @@ export function Header() {
         <nav className="hidden items-center gap-8 lg:flex">
           {nav.map((n) => (
             <Link
-              key={n.to}
+              key={n.label}
               to={n.to}
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-              activeProps={{ className: "text-foreground" }}
+              search={n.search as any}
+              className="text-sm text-muted-foreground transition-colors hover:text-foreground animate-fade-in"
+              activeProps={{ className: "text-foreground font-medium" }}
               activeOptions={{ exact: n.to === "/" }}
             >
               {n.label}
@@ -181,7 +191,7 @@ export function Header() {
             />
           </form>
           {nav.map((n) => (
-            <Link key={n.to} to={n.to} className="py-3 text-base">
+            <Link key={n.label} to={n.to} search={n.search as any} className="py-3 text-base">
               {n.label}
             </Link>
           ))}

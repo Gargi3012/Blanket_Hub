@@ -96,7 +96,7 @@ function ProductDetails() {
 
   // Compose dynamic WhatsApp message
   const handleWhatsAppEnquiry = () => {
-    const message = `Hi Loom & Luxe, I'm interested in receiving a custom wholesale quote for the following:\n\n*Product:* ${product.name}\n*Size:* ${selectedSize}\n*Colour:* ${selectedColor}\n*Quantity:* ${quantity} pcs\n\nPlease share availability and delivery estimates.`;
+    const message = `Hi CozyNest, I'm interested in receiving a custom wholesale quote for the following:\n\n*Product:* ${product.name}\n*Size:* ${selectedSize}\n*Colour:* ${selectedColor}\n*Quantity:* ${quantity} pcs\n\nPlease share availability and delivery estimates.`;
     window.open(whatsappLink(message), "_blank");
   };
 
@@ -331,7 +331,7 @@ function ProductDetails() {
                   <span className="text-xs text-muted-foreground">(Verified Wholesale Distributors Only)</span>
                 </div>
                 <p className="text-xs text-muted-foreground italic leading-relaxed border-l-2 border-gold pl-3">
-                  “Consistent stitching strength and flawless soft pile. Loom & Luxe blankets have become a signature item in our winter catalog.” — Gupta Bedding Emporium, pan-India retailer.
+                  “Consistent stitching strength and flawless soft pile. CozyNest blankets have become a signature item in our winter catalog.” — Gupta Bedding Emporium, pan-India retailer.
                 </p>
               </div>
             )}

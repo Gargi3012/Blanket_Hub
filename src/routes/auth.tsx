@@ -22,7 +22,7 @@ function Auth() {
     }
 
     // Simulate login/signup success
-    toast.success(isLogin ? "Welcome back to Loom & Luxe!" : "Account created successfully!");
+    toast.success(isLogin ? "Welcome back to CozyNest!" : "Account created successfully!");
     navigate({ to: "/" });
   };
 

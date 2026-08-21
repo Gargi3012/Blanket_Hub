@@ -109,7 +109,7 @@ function Wholesale() {
                 Get connected to our corporate accounts desk immediately to discuss custom weights, designs, and volume discounts.
               </p>
               <a
-                href={whatsappLink("Hi Loom & Luxe, I need an urgent wholesale price list for mink and fleece blankets.")}
+                href={whatsappLink("Hi CozyNest, I need an urgent wholesale price list for mink and fleece blankets.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-[#25d366] px-6 py-3 text-xs font-semibold uppercase tracking-widest text-white shadow-soft hover:bg-[#25d366]/90 transition-colors"
