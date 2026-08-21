@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { productsQuery } from "@/lib/products";
 import { ProductCard } from "@/components/ProductCard";
-import { site, whatsappLink } from "@/lib/site";
+import { site, whatsappLink, categories } from "@/lib/site";
 import { useCart } from "@/hooks/useCart";
 import { useWishlist } from "@/hooks/useWishlist";
 import { toast } from "sonner";
@@ -232,9 +232,13 @@ function Index() {
               }}
               className="relative h-[320px] w-full max-w-[420px] md:h-[450px] rounded-3xl border border-border/50 bg-card shadow-lift overflow-hidden group"
             >
-              <img
-                src="/images/hero-blanket.jpg"
-                alt="CozyNest Premium lifestyle blanket"
+              <video
+                src="/images/hero-video.mp4"
+                poster="/images/hero-blanket.jpg"
+                autoPlay
+                loop
+                muted
+                playsInline
                 className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-103"
               />
 
