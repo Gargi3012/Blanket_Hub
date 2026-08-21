@@ -179,7 +179,7 @@ export function Header() {
             className={cn(
               "hidden rounded-full px-5 py-2 text-[11px] font-semibold uppercase tracking-widest transition-all duration-300 md:inline-flex mr-2",
               isHomepage && !isScrolled
-                ? "bg-white text-primary-foreground hover:bg-white/90"
+                ? "bg-white text-primary hover:bg-white/90"
                 : "bg-primary text-primary-foreground hover:bg-primary/90"
             )}
           >
