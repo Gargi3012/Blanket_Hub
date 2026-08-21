@@ -39,11 +39,22 @@ function Index() {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
     const y = (e.clientY - rect.top) / rect.height - 0.5;
-    setHeroTilt({ x: x * 12, y: y * -12 });
+    setHeroTilt({ x: x * 15, y: y * -15 });
   };
   const handleHeroMouseLeave = () => {
     setHeroTilt({ x: 0, y: 0 });
   };
+
+  // Background carousel images state
+  const [bgIdx, setBgIdx] = useState(0);
+  const heroBgs = ["/images/hero-blanket.jpg", "/images/collection.jpg", "/images/cat-premium.jpg"];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBgIdx((prev) => (prev + 1) % heroBgs.length);
+    }, 7500);
+    return () => clearInterval(interval);
+  }, []);
 
   // 2. Customizer state
   const [customSize, setCustomSize] = useState("Double (200x220 cm)");
@@ -168,94 +179,91 @@ function Index() {
     <div className="flex flex-col overflow-x-hidden bg-[#FAF9F6] text-foreground min-h-screen">
       {/* 1. HERO SECTION */}
       <section
-        className="relative overflow-hidden py-16 md:py-28 bg-gradient-cream"
+        className="relative h-screen min-h-[650px] w-full flex items-center overflow-hidden bg-black"
         onMouseMove={handleHeroMouseMove}
         onMouseLeave={handleHeroMouseLeave}
       >
-        <div className="container-page grid items-center gap-12 lg:grid-cols-12 relative z-10">
-          {/* Hero Left Content */}
-          <div className="space-y-8 lg:col-span-6 animate-fade-in duration-1000">
-            <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold-soft/30 px-4 py-1.5 shadow-sm">
+        {/* Immersive Full-Bleed Carousel Background */}
+        <div 
+          className="absolute inset-0 z-0 select-none pointer-events-none transition-transform duration-500 ease-out"
+          style={{
+            transform: `translate3d(${heroTilt.x * 0.8}px, ${heroTilt.y * 0.8}px, 0) scale(1.04)`,
+          }}
+        >
+          {heroBgs.map((img, index) => (
+            <img
+              key={img}
+              src={img}
+              alt=""
+              className={cn(
+                "absolute inset-0 h-full w-full object-cover transition-opacity duration-1500 ease-in-out",
+                bgIdx === index ? "opacity-100 animate-ken-burns" : "opacity-0"
+              )}
+            />
+          ))}
+          {/* Subtle Dark/Cream Luxury Vignette Gradient Overlays */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/25 z-10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/35 z-10" />
+        </div>
+
+        {/* Floating Glassmorphic Product Information Cards */}
+        <div className="absolute top-[26%] right-[10%] hidden lg:flex flex-col gap-1.5 p-5 rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md text-white shadow-lift animate-float-slow z-20 max-w-[210px] pointer-events-none select-none">
+          <p className="text-[9px] uppercase tracking-widest text-gold font-bold">Standard Sizing</p>
+          <h4 className="font-display text-sm font-semibold">AVAILABLE SIZES</h4>
+          <p className="text-[10px] text-white/80 mt-0.5">Single • Queen • King</p>
+        </div>
+
+        <div className="absolute bottom-[28%] right-[14%] hidden lg:flex flex-col gap-1.5 p-5 rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md text-white shadow-lift animate-float-slow [animation-delay:2.5s] z-20 max-w-[190px] pointer-events-none select-none">
+          <p className="text-[9px] uppercase tracking-widest text-gold font-bold">Touch</p>
+          <h4 className="font-display text-sm font-semibold">ULTRA SOFT</h4>
+          <p className="text-[10px] text-white/80 mt-0.5">Heavyweight Mink Velvet</p>
+        </div>
+
+        {/* Content Centered/Aligned */}
+        <div className="container-page relative z-20 w-full flex items-center justify-start py-20 mt-12">
+          <div className="max-w-2xl space-y-8 animate-fade-in duration-1000">
+            <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold-soft/20 px-4 py-1.5 backdrop-blur-sm shadow-sm">
               <Sparkles className="h-3.5 w-3.5 text-gold" />
-              <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-foreground">
-                ESTABLISHED BEDDING LUXURY
+              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-gold-soft">
+                PREMIUM BLANKETS • MADE FOR COMFORT
               </span>
             </div>
 
             <div className="space-y-4">
-              <h1 className="font-display text-5xl leading-[1.1] text-foreground sm:text-6xl md:text-7xl font-light">
+              <h1 className="font-display text-5xl leading-[1.05] text-white sm:text-7xl md:text-8xl font-light">
                 Comfort, <br />
-                <span className="italic font-normal text-foreground/80">Wrapped in Luxury.</span>
+                <span className="italic font-normal text-white/95">Wrapped in Luxury.</span>
               </h1>
-              <p className="max-w-xl text-base md:text-lg leading-relaxed text-muted-foreground font-light">
-                Premium blankets designed to bring warmth, comfort and style to every home. Exquisitely woven using dense synthetic plush and natural cloud fiber blends.
+              <p className="max-w-xl text-base md:text-lg leading-relaxed text-white/80 font-light">
+                Premium blankets crafted for warmth, softness and everyday comfort. Exquisitely woven using dense synthetic plush and natural cloud fiber blends.
               </p>
             </div>
 
             <div className="flex flex-wrap gap-4 pt-2">
               <Link
                 to="/shop"
-                className="rounded-full bg-primary px-8 py-4 text-xs font-semibold uppercase tracking-widest text-primary-foreground shadow-lift transition-transform hover:-translate-y-0.5 hover:bg-primary/95"
+                className="rounded-full bg-gold hover:bg-gold/90 px-8 py-4 text-xs font-semibold uppercase tracking-widest text-primary-foreground shadow-lift transition-transform hover:-translate-y-0.5"
               >
                 Shop Collection
               </Link>
               <a
                 href="#bestsellers"
-                className="rounded-full border border-border bg-card px-8 py-4 text-xs font-semibold uppercase tracking-widest text-foreground shadow-soft transition-transform hover:-translate-y-0.5 hover:bg-secondary"
+                className="rounded-full border border-white/35 bg-white/5 hover:bg-white/15 px-8 py-4 text-xs font-semibold uppercase tracking-widest text-white shadow-soft transition-transform hover:-translate-y-0.5 backdrop-blur-sm"
               >
-                Explore Bestsellers
+                Explore Collection
               </a>
             </div>
 
-            <div className="grid grid-cols-3 border-t border-border/80 pt-8 gap-4 max-w-lg">
-              <div>
-                <p className="font-display text-2xl md:text-3xl text-foreground font-light">100%</p>
-                <p className="text-[9px] text-muted-foreground tracking-widest uppercase mt-1">Premium Quality</p>
-              </div>
-              <div>
-                <p className="font-display text-2xl md:text-3xl text-foreground font-light">Direct</p>
-                <p className="text-[9px] text-muted-foreground tracking-widest uppercase mt-1">Wholesale price</p>
-              </div>
-              <div>
-                <p className="font-display text-2xl md:text-3xl text-foreground font-light">Custom</p>
-                <p className="text-[9px] text-muted-foreground tracking-widest uppercase mt-1">Embossing Options</p>
-              </div>
-            </div>
+            <p className="text-[10px] text-white/55 tracking-widest uppercase font-light border-t border-white/10 pt-6 max-w-sm">
+              Premium Quality • Soft Touch • Fast Delivery
+            </p>
           </div>
+        </div>
 
-          {/* Hero Right Media */}
-          <div className="flex justify-center lg:col-span-6 animate-fade-in duration-1000 delay-200">
-            <div
-              style={{
-                transform: `perspective(1000px) rotateY(${heroTilt.x}deg) rotateX(${heroTilt.y}deg)`,
-                transition: "transform 0.1s ease-out",
-              }}
-              className="relative h-[320px] w-full max-w-[420px] md:h-[450px] rounded-3xl border border-border/50 bg-card shadow-lift overflow-hidden group"
-            >
-              <video
-                src="/images/hero-video.mp4"
-                poster="/images/hero-blanket.jpg"
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-103"
-              />
-
-              {/* Floating glassmorphic badges */}
-              <div className="absolute top-8 left-6 rounded-2xl bg-background/80 backdrop-blur-md border border-border/40 px-4 py-2.5 shadow-soft max-w-[140px] animate-bounce duration-[4000ms]">
-                <p className="text-[9px] uppercase font-bold tracking-widest text-gold">Feel</p>
-                <p className="text-xs font-semibold text-foreground mt-0.5">Ultra-Soft Touch</p>
-              </div>
-
-              <div className="absolute bottom-8 right-6 rounded-2xl bg-background/80 backdrop-blur-md border border-border/40 px-4 py-2.5 shadow-soft max-w-[140px]">
-                <p className="text-[9px] uppercase font-bold tracking-widest text-gold">Warmth</p>
-                <p className="text-xs font-semibold text-foreground mt-0.5">Heavyweight Pile</p>
-              </div>
-
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
-            </div>
-          </div>
+        {/* Minimal Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 z-20 text-center animate-pulse-slow pointer-events-none select-none">
+          <p className="text-[9px] uppercase tracking-[0.3em] text-white/70">Scroll to Explore</p>
+          <span className="text-white/85 text-xs block mt-1">↓</span>
         </div>
       </section>
 
